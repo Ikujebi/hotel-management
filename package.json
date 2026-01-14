@@ -1,16 +1,19 @@
 {
   "name": "hotel-management",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "studio": "sanity start ./studio",
+    "studio-build": "sanity build ./studio",
+    "studio-deploy": "sanity deploy ./studio",
+    "studio-deploy-graphql": "sanity graphql deploy ./studio"
   },
   "dependencies": {
     "@sanity/image-url": "^1.2.0",
-    "@sanity/vision": "^4.22.0",
     "@stripe/stripe-js": "^2.1.7",
     "@types/node": "20.8.2",
     "@types/react": "18.2.24",
@@ -18,27 +21,34 @@
     "autoprefixer": "10.4.16",
     "axios": "^1.5.1",
     "chart.js": "^4.4.0",
-    "eslint": "8.50.0",
+    "eslint": "^8.50.0",
     "eslint-config-next": "13.5.4",
-    "next": "13.5.4",
+    "next": "^16.1.1",
     "next-auth": "^4.23.2",
     "next-auth-sanity": "^1.5.3",
     "next-sanity": "^11.6.12",
     "postcss": "8.4.31",
-    "react": "18.2.0",
+    "react": "^18.3.1",
     "react-chartjs-2": "^5.2.0",
     "react-datepicker": "^4.20.0",
-    "react-dom": "18.2.0",
+    "react-dom": "^18.3.1",
     "react-hot-toast": "^2.4.1",
     "react-icons": "^4.11.0",
-    "sanity": "^4.22.0",
     "stripe": "^13.10.0",
-    "styled-components": "^6.3.6",
+    "styled-components": "^6.1.18",
     "swr": "^2.2.4",
     "tailwindcss": "3.3.3",
     "typescript": "5.2.2"
   },
   "devDependencies": {
-    "@types/react-datepicker": "^4.15.2"
+    "@types/react-datepicker": "^4.15.2",
+    "prettier": "^3.5"
+  },
+  
+  "prettier": {
+    "semi": false,
+    "printWidth": 100,
+    "bracketSpacing": false,
+    "singleQuote": true
   }
 }
