@@ -1,6 +1,6 @@
-import { defineField } from 'sanity';
+import { defineType, defineField } from 'sanity'
 
-const review = {
+export default defineType({
   name: 'review',
   title: 'Review',
   type: 'document',
@@ -29,10 +29,7 @@ const review = {
       name: 'userRating',
       title: 'User Rating',
       type: 'number',
-      validation: Rule =>
-        Rule.required().min(1).max(5).error('Rating must be between 1 and 5'),
+      validation: Rule => Rule.required().min(1).max(5),
     }),
   ],
-};
-
-export default review;
+})

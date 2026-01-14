@@ -1,6 +1,6 @@
-import { defineField } from 'sanity';
+import { defineType, defineField } from 'sanity'
 
-const account = {
+export default defineType({
   name: 'account',
   title: 'Account',
   type: 'document',
@@ -31,11 +31,9 @@ const account = {
     }),
     defineField({
       name: 'user',
-      title: 'user',
+      title: 'User',
       type: 'reference',
-      to: { type: 'user' },
+      to: [{ type: 'user' }],
     }),
   ],
-};
-
-export default account;
+})

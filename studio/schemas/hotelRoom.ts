@@ -1,12 +1,12 @@
-import { defineField } from 'sanity';
+import { defineType, defineField } from 'sanity'
 
 const roomTypes = [
   { title: 'Basic', value: 'basic' },
   { title: 'Luxury', value: 'luxury' },
   { title: 'Suite', value: 'suite' },
-];
+]
 
-const hotelRoom = {
+export default defineType({
   name: 'hotelRoom',
   title: 'Hotel Room',
   type: 'document',
@@ -15,30 +15,25 @@ const hotelRoom = {
       name: 'name',
       title: 'Name',
       type: 'string',
-      validation: Rule =>
-        Rule.required().max(50).error('Maximum 50 Characters'),
+      validation: Rule => Rule.required().max(50),
     }),
     defineField({
       name: 'slug',
       type: 'slug',
-      options: {
-        source: 'name',
-      },
+      options: { source: 'name' },
       validation: Rule => Rule.required(),
     }),
     defineField({
       name: 'description',
       title: 'Description',
       type: 'text',
-      validation: Rule =>
-        Rule.required().min(100).error('Minimum 100 Characters'),
+      validation: Rule => Rule.required().min(100),
     }),
     defineField({
       name: 'price',
       title: 'Price',
       type: 'number',
-      validation: Rule =>
-        Rule.required().min(100).error('Minimum 100 Characters'),
+      validation: Rule => Rule.required().min(100),
     }),
     defineField({
       name: 'discount',
@@ -55,41 +50,37 @@ const hotelRoom = {
         {
           type: 'object',
           fields: [
-            { name: 'url', type: 'url', title: 'URL' },
-            { name: 'file', type: 'file', title: 'File' },
+            defineField({ name: 'url', type: 'url' }),
+            defineField({ name: 'file', type: 'file' }),
           ],
         },
       ],
-      validation: Rule =>
-        Rule.required().min(3).error('Minimum of 3 images required'),
+      validation: Rule => Rule.required().min(3),
     }),
     defineField({
       name: 'coverImage',
       title: 'Cover Image',
       type: 'object',
       fields: [
-        { name: 'url', type: 'url', title: 'URL' },
-        { name: 'file', type: 'file', title: 'File' },
+        defineField({ name: 'url', type: 'url' }),
+        defineField({ name: 'file', type: 'file' }),
       ],
-      validation: Rule => Rule.required().error('Cover Image is required'),
+      validation: Rule => Rule.required(),
     }),
     defineField({
       name: 'type',
       title: 'Room Type',
       type: 'string',
-      options: {
-        list: roomTypes,
-      },
-      validation: Rule => Rule.required(),
+      options: { list: roomTypes },
       initialValue: 'basic',
+      validation: Rule => Rule.required(),
     }),
     defineField({
       name: 'specialNote',
       title: 'Special Note',
       type: 'text',
-      validation: Rule => Rule.required(),
       initialValue:
-        'Check-in time is 12:00 PM, checkout time is 11:59 AM. If you leave behind any items, please contact the receptionist.',
+        'Check-in time is 12:00 PM, checkout time is 11:59 AM.',
     }),
     defineField({
       name: 'dimension',
@@ -100,8 +91,8 @@ const hotelRoom = {
       name: 'numberOfBeds',
       title: 'Number Of Beds',
       type: 'number',
-      validation: Rule => Rule.min(1),
       initialValue: 1,
+      validation: Rule => Rule.min(1),
     }),
     defineField({
       name: 'offeredAmenities',
@@ -111,8 +102,8 @@ const hotelRoom = {
         {
           type: 'object',
           fields: [
-            { name: 'icon', title: 'Icon', type: 'string' },
-            { name: 'amenity', title: 'Amenity', type: 'string' },
+            defineField({ name: 'icon', type: 'string' }),
+            defineField({ name: 'amenity', type: 'string' }),
           ],
         },
       ],
@@ -133,9 +124,7 @@ const hotelRoom = {
       name: 'reviews',
       title: 'Reviews',
       type: 'array',
-      of: [{ type: 'review' }],
+      of: [{ type: 'reference', to: [{ type: 'review' }] }],
     }),
   ],
-};
-
-export default hotelRoom;
+})

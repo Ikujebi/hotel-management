@@ -7,5 +7,6 @@ const sanityClient = createClient({
   token: process.env.SANITY_STUDIO_TOKEN,
   apiVersion: '2021-10-21',
 });
+console.log(process.env.NEXT_PUBLIC_SANITY_PROJECT_ID, process.env.NEXT_PUBLIC_SANITY_DATASET);
 
 export default sanityClient;

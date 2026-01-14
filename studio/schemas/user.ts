@@ -1,25 +1,20 @@
-import { defineField } from 'sanity';
+import { defineType, defineField } from 'sanity'
 
-const user = {
+export default defineType({
   name: 'user',
-  title: 'user',
+  title: 'User',
   type: 'document',
   fields: [
     defineField({
       name: 'isAdmin',
       title: 'Is Admin',
       type: 'boolean',
-      description: 'Check if the user is admin',
       initialValue: false,
-      validation: Rule => Rule.required(),
-      //   readOnly: true,
-      //   hidden: true,
     }),
     defineField({
       name: 'name',
       title: 'Name',
       type: 'string',
-      description: 'Name of the user',
       readOnly: true,
       validation: Rule => Rule.required(),
     }),
@@ -35,8 +30,8 @@ const user = {
     }),
     defineField({
       name: 'email',
-      type: 'string',
       title: 'Email',
+      type: 'string',
     }),
     defineField({
       name: 'emailVerified',
@@ -47,9 +42,6 @@ const user = {
       name: 'about',
       title: 'About',
       type: 'text',
-      description: 'A brief dsecription about the user',
     }),
   ],
-};
-
-export default user;
+})

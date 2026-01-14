@@ -1,6 +1,6 @@
-import { defineField } from 'sanity';
+import { defineType, defineField } from 'sanity'
 
-const verificationToken = {
+export default defineType({
   name: 'verification-token',
   title: 'Verification Token',
   type: 'document',
@@ -21,6 +21,4 @@ const verificationToken = {
       type: 'datetime',
     }),
   ],
-};
-
-export default verificationToken;
+})
