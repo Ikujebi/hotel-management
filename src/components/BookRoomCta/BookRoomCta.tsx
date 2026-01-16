@@ -11,7 +11,7 @@ type Props = {
   setCheckoutDate: Dispatch<SetStateAction<Date | null>>;
   setAdults: Dispatch<SetStateAction<number>>;
   setNoOfChildren: Dispatch<SetStateAction<number>>;
-  calcMinCheckoutDate: () => Date | null;
+  calcMinCheckoutDate: () => Date | undefined ;
   price: number;
   discount: number;
   adults: number;
@@ -80,13 +80,13 @@ const BookRoomCta: FC<Props> = props => {
             Check In date
           </label>
           <DatePicker
-            selected={checkinDate}
-            onChange={date => setCheckinDate(date)}
-            dateFormat='dd/MM/yyyy'
-            minDate={new Date()}
-            id='check-in-date'
-            className='w-full border text-black border-gray-300 rounded-lg p-2.5 focus:ring-primary focus:border-primary'
-          />
+  selected={checkinDate}
+  onChange={(date: Date | null) => setCheckinDate(date)}
+  dateFormat='dd/MM/yyyy'
+  minDate={new Date()}
+  id='check-in-date'
+  className='w-full border text-black border-gray-300 rounded-lg p-2.5 focus:ring-primary focus:border-primary'
+/>
         </div>
         <div className='w-1/2 pl-2'>
           <label
@@ -96,14 +96,14 @@ const BookRoomCta: FC<Props> = props => {
             Check Out date
           </label>
           <DatePicker
-            selected={checkoutDate}
-            onChange={date => setCheckoutDate(date)}
-            dateFormat='dd/MM/yyyy'
-            disabled={!checkinDate}
-            minDate={calcMinCheckoutDate()}
-            id='check-out-date'
-            className='w-full border text-black border-gray-300 rounded-lg p-2.5 focus:ring-primary focus:border-primary'
-          />
+  selected={checkoutDate}
+  onChange={(date: Date | null) => setCheckoutDate(date)}
+  dateFormat='dd/MM/yyyy'
+  disabled={!checkinDate}
+  minDate={calcMinCheckoutDate()}
+  id='check-out-date'
+  className='w-full border text-black border-gray-300 rounded-lg p-2.5 focus:ring-primary focus:border-primary'
+/>
         </div>
       </div>
 

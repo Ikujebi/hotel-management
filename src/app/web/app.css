@@ -1,0 +1,89 @@
+/* =========================
+   Images
+========================= */
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* =========================
+   Animations
+========================= */
+.scale-animation {
+  transition: transform 0.7s ease;
+}
+
+.scale-animation:hover {
+  transform: scale(1.25);
+}
+
+/* =========================
+   Buttons
+========================= */
+.btn-primary,
+.btn-tertiary {
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #038c7f;
+  color: #ffffff;
+  box-shadow: 0 1px 3px rgba(3, 140, 127, 0.5);
+}
+
+.btn-tertiary {
+  background-color: #f2c641;
+  color: #ffffff;
+  box-shadow: 0 1px 3px rgba(242, 198, 65, 0.5);
+}
+
+.btn-primary:hover,
+.btn-tertiary:hover {
+  transform: scale(1.1);
+}
+
+/* =========================
+   Fonts
+========================= */
+.font-heading {
+  font-weight: 500;
+  font-size: 1.875rem;
+}
+
+.font-normal {
+  font-size: 0.875rem;
+}
+
+/* =========================
+   Responsive Styles
+========================= */
+@media (min-width: 768px) {
+  .btn-primary,
+  .btn-tertiary {
+    padding: 1.25rem 3.125rem;
+    border-radius: 1rem;
+    font-size: 1.25rem;
+  }
+
+  .font-heading {
+    font-weight: 600;
+    font-size: 3.75rem;
+  }
+
+  .font-normal {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .btn-primary,
+  .btn-tertiary {
+    padding-left: 4.5rem;
+    padding-right: 4.5rem;
+  }
+}

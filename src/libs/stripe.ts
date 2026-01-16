@@ -1,13 +1,12 @@
-import { Stripe, loadStripe } from '@stripe/stripe-js';
+import { loadStripe, Stripe as StripeType } from '@stripe/stripe-js'
 
-let stripePromise: Promise<Stripe | null>;
+let stripePromise: Promise<StripeType | null>
 
-export const getStripe = () => {
+export const getStripe = (): Promise<StripeType | null> => {
   if (!stripePromise) {
     stripePromise = loadStripe(
       process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string
-    );
+    )
   }
-
-  return stripePromise;
-};
+  return stripePromise
+}

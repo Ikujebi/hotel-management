@@ -2,52 +2,64 @@ import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
 import { createBooking, updateHotelRoom } from '@/libs/apis';
-
-const checkout_session_completed = 'checkout.session.completed';
+import type { BookingMetadata } from '@/types/stripe';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
-  apiVersion: '2023-08-16',
+  apiVersion: '2023-10-16',
 });
 
-export async function POST(req: Request, res: Response) {
-  const reqBody = await req.text();
-  const sig = req.headers.get('stripe-signature');
+const CHECKOUT_SESSION_COMPLETED = 'checkout.session.completed';
+
+export async function POST(req: Request) {
+  const body = await req.text();
+  const signature = req.headers.get('stripe-signature');
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+
+  if (!signature || !webhookSecret) {
+    return new NextResponse('Missing Stripe signature or webhook secret', {
+      status: 400,
+    });
+  }
 
   let event: Stripe.Event;
 
   try {
-    if (!sig || !webhookSecret) return;
-    event = stripe.webhooks.constructEvent(reqBody, sig, webhookSecret);
+    event = stripe.webhooks.constructEvent(body, signature, webhookSecret);
   } catch (error: any) {
-    return new NextResponse(`Webhook Error: ${error.message}`, { status: 500 });
+    return new NextResponse(`Webhook Error: ${error.message}`, {
+      status: 400,
+    });
   }
 
-  // load our event
   switch (event.type) {
-    case checkout_session_completed:
-      const session = event.data.object;
+    case CHECKOUT_SESSION_COMPLETED: {
+      const session = event.data.object as Stripe.Checkout.Session;
+
+      const metadata = session.metadata as BookingMetadata | null;
+
+      if (!metadata) {
+        return new NextResponse('Missing booking metadata', {
+          status: 400,
+        });
+      }
 
       const {
-        // @ts-ignore
-        metadata: {
-          adults,
-          checkinDate,
-          checkoutDate,
-          children,
-          hotelRoom,
-          numberOfDays,
-          user,
-          discount,
-          totalPrice,
-        },
-      } = session;
+        adults,
+        children,
+        checkInDate,
+        checkOutDate,
+        hotelRoom,
+        numberOfDays,
+        user,
+        discount,
+        totalPrice,
+      } = metadata;
 
       await createBooking({
         adults: Number(adults),
-        checkinDate,
-        checkoutDate,
-        children: Number(children),
+        children: children ? Number(children) : 0,
+        checkinDate: checkInDate,
+        checkoutDate: checkOutDate,
         hotelRoom,
         numberOfDays: Number(numberOfDays),
         discount: Number(discount),
@@ -55,20 +67,20 @@ export async function POST(req: Request, res: Response) {
         user,
       });
 
-      //   Update hotel Room
       await updateHotelRoom(hotelRoom);
 
-      return NextResponse.json('Booking successful', {
-        status: 200,
-        statusText: 'Booking Successful',
-      });
+      return NextResponse.json(
+        { message: 'Booking successful' },
+        { status: 200 }
+      );
+    }
 
     default:
-      console.log(`Unhandled event type ${event.type}`);
+      console.log(`Unhandled event type: ${event.type}`);
   }
 
-  return NextResponse.json('Event Received', {
-    status: 200,
-    statusText: 'Event Received',
-  });
+  return NextResponse.json(
+    { received: true },
+    { status: 200 }
+  );
 }
