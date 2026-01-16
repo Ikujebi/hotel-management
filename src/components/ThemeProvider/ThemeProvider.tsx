@@ -1,31 +1,32 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-
 import ThemeContext from '@/context/themeContext';
 
 const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
-  const themeFromStorage: boolean =
-    typeof localStorage !== 'undefined' && localStorage.getItem('hotel-theme')
-      ? JSON.parse(localStorage.getItem('hotel-theme')!)
-      : false;
+  const [darkTheme, setDarkTheme] = useState(false);
+  const [mounted, setMounted] = useState(false); // avoid flash
 
-  const [darkTheme, setDarkTheme] = useState<boolean>(themeFromStorage);
-  const [renderComponent, setRenderComponent] = useState(false);
-
+  // Load theme from localStorage on client
   useEffect(() => {
-    setRenderComponent(true);
+    const themeFromStorage = localStorage.getItem('hotel-theme');
+    if (themeFromStorage) setDarkTheme(JSON.parse(themeFromStorage));
+    setMounted(true);
   }, []);
 
-  if (!renderComponent) return <></>;
+  // Apply/remove `dark` class on body & persist theme
+  useEffect(() => {
+    if (!mounted) return;
+    if (darkTheme) document.body.classList.add('dark');
+    else document.body.classList.remove('dark');
+    localStorage.setItem('hotel-theme', JSON.stringify(darkTheme));
+  }, [darkTheme, mounted]);
+
+  if (!mounted) return null; // prevent flash of wrong theme
 
   return (
     <ThemeContext.Provider value={{ darkTheme, setDarkTheme }}>
-      <div className={`${darkTheme ? 'dark' : ''} min-h-screen`}>
-        <div className='dark:text-white dark:bg-black text-[#1E1E1E]'>
-          {children}
-        </div>
-      </div>
+      {children} {/* no extra divs */}
     </ThemeContext.Provider>
   );
 };

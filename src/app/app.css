@@ -23,26 +23,34 @@
 ========================= */
 .btn-primary,
 .btn-tertiary {
-  padding: 0.5rem 1.5rem;
-  border-radius: 0.5rem;
   font-weight: 700;
   font-size: 1rem;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1.5rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
 }
 
+/* Primary Button */
 .btn-primary {
-  background-color: #038c7f;
-  color: #ffffff;
+  background-color: #038c7f; /* Tailwind bg-primary equivalent */
+  color: #fff;
   box-shadow: 0 1px 3px rgba(3, 140, 127, 0.5);
 }
 
+.btn-primary:hover {
+  transform: scale(1.1);
+}
+
+/* Tertiary Button */
 .btn-tertiary {
-  background-color: #f2c641;
-  color: #ffffff;
+  background-color: #f2c641; /* Tailwind bg-tertiary-light */
+  color: #fff;
   box-shadow: 0 1px 3px rgba(242, 198, 65, 0.5);
 }
 
-.btn-primary:hover,
 .btn-tertiary:hover {
   transform: scale(1.1);
 }
@@ -52,38 +60,43 @@
 ========================= */
 .font-heading {
   font-weight: 500;
-  font-size: 1.875rem;
+  font-size: 1.875rem; /* ~text-3xl */
+  line-height: 1.2;
 }
 
 .font-normal {
-  font-size: 0.875rem;
+  font-weight: 400;
+  font-size: 0.875rem; /* ~text-sm */
+  line-height: 1.5;
 }
 
 /* =========================
    Responsive Styles
 ========================= */
 @media (min-width: 768px) {
+  /* Buttons */
   .btn-primary,
   .btn-tertiary {
-    padding: 1.25rem 3.125rem;
-    border-radius: 1rem;
-    font-size: 1.25rem;
+    padding: 1.25rem 3.125rem; /* md:px-12.5, md:py-5 */
+    border-radius: 1rem;       /* md:rounded-2xl */
+    font-size: 1.25rem;        /* md:text-xl */
   }
 
+  /* Fonts */
   .font-heading {
-    font-weight: 600;
-    font-size: 3.75rem;
+    font-weight: 600;          /* md:font-semibold */
+    font-size: 3.75rem;        /* md:text-6xl */
   }
 
   .font-normal {
-    font-size: 1rem;
+    font-size: 1rem;           /* md:text-base */
   }
 }
 
 @media (min-width: 1024px) {
   .btn-primary,
   .btn-tertiary {
-    padding-left: 4.5rem;
+    padding-left: 4.5rem;      /* lg:px-18 */
     padding-right: 4.5rem;
   }
 }

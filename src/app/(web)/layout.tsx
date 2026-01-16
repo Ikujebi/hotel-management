@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 
 import Header from '@/components/Header/Header';
-import '../web/globals.css';
-import '../web/app.css'
+import '../../app/globals.css';
+import '../../app/app.css';
 import Footer from '@/components/Footer/Footer';
 import ThemeProvider from '@/components/ThemeProvider/ThemeProvider';
 import { NextAuthProvider } from '@/components/AuthProvider/AuthProvider';
@@ -27,19 +27,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang='en'>
+    <html lang="en">
       <head>
         <link
-          rel='stylesheet'
-          href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css'
-          crossOrigin='anonymous'
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+          crossOrigin="anonymous"
         />
       </head>
       <body className={poppins.className}>
         <NextAuthProvider>
           <ThemeProvider>
             <Toast />
-            <main className='font-normal'>
+            <main className="font-normal">
               <Header />
               {children}
               <Footer />

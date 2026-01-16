@@ -17,7 +17,7 @@ const Header = () => {
   return (
     <header className='py-10 px-4 container mx-auto text-xl flex flex-wrap md:flex-nowrap items-center justify-between'>
       <div className='flex items-center w-full md:2/3'>
-        <Link href='/' className='font-black text-tertiary-dark'>
+        <Link href='/' className='font-black text-[#F27405] no-underline'>
           Hotelzz
         </Link>
         <ul className='flex items-center ml-5'>
@@ -66,17 +66,22 @@ const Header = () => {
         </ul>
       </div>
 
-      <ul className='flex items-center justify-between w-full md:w-1/3 mt-4'>
-        <li className='hover:-translate-y-2 duration-500 transition-all'>
-          <Link href='/'>Home</Link>
-        </li>
-        <li className='hover:-translate-y-2 duration-500 transition-all'>
-          <Link href='/rooms'>Rooms</Link>
-        </li>
-        <li className='hover:-translate-y-2 duration-500 transition-all'>
-          <Link href='/'>Contact</Link>
-        </li>
-      </ul>
+ <ul className="flex items-center justify-end w-full mt-4 space-x-6 text-gray-800 dark:text-gray-200 font-medium list-none">
+  {['Home', 'Rooms', 'Contact'].map((link, i) => (
+    <li
+      key={i}
+      className="cursor-pointer transform transition duration-300 ease-in-out 
+                 hover:-translate-y-2 hover:scale-110 active:translate-y-1 active:scale-105"
+    >
+      <Link
+        href={link === 'Home' ? '/' : `/${link.toLowerCase()}`}
+        className="text-lg md:text-xl font-semibold  hover:text-[#F27405] transition-colors duration-300 no-underline "
+      >
+        {link}
+      </Link>
+    </li>
+  ))}
+</ul>
     </header>
   );
 };
