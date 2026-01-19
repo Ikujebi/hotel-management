@@ -66,7 +66,7 @@ const Header = () => {
         </ul>
       </div>
 
- <ul className="flex items-center justify-end w-full mt-4 space-x-6 text-gray-800 dark:text-gray-200 font-medium list-none">
+ <ul className="bg-red-200 flex items-center justify-end w-screen mt-4 space-x-6 text-gray-800 dark:text-gray-200 font-medium list-none py-2 px-4">
   {['Home', 'Rooms', 'Contact'].map((link, i) => (
     <li
       key={i}
@@ -75,7 +75,7 @@ const Header = () => {
     >
       <Link
         href={link === 'Home' ? '/' : `/${link.toLowerCase()}`}
-        className="text-lg md:text-xl font-semibold  hover:text-[#F27405] transition-colors duration-300 no-underline "
+        className="inline-block text-lg md:text-xl font-semibold  hover:text-[#F27405] transition-colors duration-300 no-underline "
       >
         {link}
       </Link>

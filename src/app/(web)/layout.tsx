@@ -3,7 +3,7 @@ import { Poppins } from 'next/font/google';
 
 import Header from '@/components/Header/Header';
 import '../../app/globals.css';
-import '../../app/app.css';
+import './app.css';
 import Footer from '@/components/Footer/Footer';
 import ThemeProvider from '@/components/ThemeProvider/ThemeProvider';
 import { NextAuthProvider } from '@/components/AuthProvider/AuthProvider';
