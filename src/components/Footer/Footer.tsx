@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { BsFillSendFill, BsTelephoneOutbound } from 'react-icons/bs';
-import { BiMessageDetail } from 'react-icons/bi';
+import { FaWhatsapp } from 'react-icons/fa';
 
 const Footer = () => {
   return (
@@ -17,15 +17,17 @@ const Footer = () => {
             <p>123 Road</p>
             <div className='flex items-center py-4'>
               <BsFillSendFill />
-              <p className='ml-2'>codewithlari</p>
+            <Link className='text-[#000] hover:text-[#F27405] no-underline' href='https://ayanfetech-hub.vercel.app/'><p className='ml-2'>Ayanfe</p></Link>  
             </div>
             <div className='flex items-center'>
               <BsTelephoneOutbound />
-              <p className='ml-2'>000-000-00</p>
+              <Link className='text-[#000] hover:text-[#F27405] no-underline' href='tel:+2348137977542'>
+              <p className='ml-2'>813-797-7542</p></Link>
             </div>
             <div className='flex items-center pt-4'>
-              <BiMessageDetail />
-              <p className='ml-2'>codewithlari</p>
+              <FaWhatsapp />
+              <Link className='text-[#000] hover:text-[#F27405] no-underline' href='https://wa.me/8137977542' target="_blank" rel="noopener noreferrer">
+              <p className='ml-2'>Ayanfe</p></Link>
             </div>
           </div>
 
