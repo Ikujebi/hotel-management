@@ -66,7 +66,7 @@ const Search: FC<Props> = ({
         </div>
 
         <button
-          className='btn-primary'
+          className='btn-primary border-none'
           type='button'
           onClick={handleFilterClick}
         >

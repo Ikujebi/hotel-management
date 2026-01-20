@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <footer className='mt-16'>
       <div className='container mx-auto px-4'>
-        <Link href='/' className='font-black text-tertiary-dark'>
+        <Link href='/' className='font-black text-[#F27405] no-underline'>
           Hotelzz
         </Link>
 
